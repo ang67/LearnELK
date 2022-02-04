@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "debelk" do |debelk|
+    debelk.vm.box_download_insecure = true
+    debelk.vm.box = "debian/buster64"
+    debelk.vm.network "forwarded_port", guest: 9300, host: 9300
+    debelk.vm.network "forwarded_port", guest: 80, host: 8080
+    debelk.vm.network "forwarded_port", guest: 9090, host: 9090
+    debelk.vm.network "private_network", ip: "100.0.0.20"
+    debelk.vm.hostname = "debelk"
+    debelk.vm.provider "virtualbox" do |v|
+      v.name = "debelk"
+      v.memory = 3072
+      v.cpus = 2
+    end
+  end
+
+end
